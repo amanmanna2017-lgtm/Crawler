@@ -51,7 +51,6 @@ async def download_worker(db, downloader, uploader, wid):
                     await db.execute("UPDATE jobs SET media_uploaded = media_uploaded+1 WHERE id=?", (job_id,))
                     await db.commit()
                     logger.info(f"Uploaded {mid}")
-                # cleanup
                 if os.path.exists(local): os.remove(local)
                 if os.path.exists(thumb): os.remove(thumb)
             except Exception as e:
@@ -82,13 +81,8 @@ async def main():
     bot = Bot(token=Config.BOT_TOKEN)
     tele = None
     try:
-        tele = None
-try:
-    tele = TelegramClient("telethon_session", Config.API_ID, Config.API_HASH)
-    await tele.start()
-    logger.info("Telethon ready")
-except Exception as e:
-    logger.warning(f"Telethon not available: {e}. Large file uploads disabled.")
+        tele = TelegramClient("telethon_session", Config.API_ID, Config.API_HASH)
+        await tele.start()
         logger.info("Telethon ready")
     except Exception as e:
         logger.warning(f"Telethon failed: {e}")
