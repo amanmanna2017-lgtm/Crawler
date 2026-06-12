@@ -6,14 +6,14 @@ router = Router()
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
     await message.answer(
-        "🤖 *Website Archiver Bot*\n\n"
+        "🤖 <b>Website Archiver Bot</b>\n\n"
         "Commands:\n"
-        "/scan \\<url\\> [depth] - Start crawling\n"
+        "/scan &lt;url&gt; [depth] - Start crawling\n"
         "/stop - Pause current crawl\n"
         "/resume - Resume paused crawl\n"
         "/status - Show job status\n"
         "/stats - Your statistics\n"
         "/queue - Pending media count\n\n"
-        "Example: `/scan https://example.com 2`",
-        parse_mode="MarkdownV2"
+        "Example: <code>/scan https://example.com 2</code>",
+        parse_mode="HTML"
     )
