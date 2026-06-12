@@ -82,8 +82,13 @@ async def main():
     bot = Bot(token=Config.BOT_TOKEN)
     tele = None
     try:
-        tele = TelegramClient("telethon_session", Config.API_ID, Config.API_HASH)
-        await tele.start()
+        tele = None
+try:
+    tele = TelegramClient("telethon_session", Config.API_ID, Config.API_HASH)
+    await tele.start()
+    logger.info("Telethon ready")
+except Exception as e:
+    logger.warning(f"Telethon not available: {e}. Large file uploads disabled.")
         logger.info("Telethon ready")
     except Exception as e:
         logger.warning(f"Telethon failed: {e}")
